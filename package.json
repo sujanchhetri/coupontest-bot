@@ -1,0 +1,18 @@
+{
+  "name": "script",
+  "version": "1.0.0",
+  "description": "scraper",
+  "main": "script.js",
+  "scripts": {
+    "start": "node script.js",
+    "build":"pkg --out-path build script.js --public"
+  },
+  "keywords": [],
+  "author": "Sujan Chhetri",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^10.4.0",
+    "puppeteer-extra": "^3.2.2",
+    "puppeteer-extra-plugin-stealth": "^2.8.1"
+  }
+}
