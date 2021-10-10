@@ -11,6 +11,7 @@
 - open terminal and run `npm install ` to install all the dependencies
 - after all the dependencies are installed type `npm run start` or Use `node script` to run the bot
 
+
 # Note
 - copy and  paste node_modules\puppeteer\.local-chromium\win64-901912  to build\chromium\win64-901912
 - Don't press any other key or mouse until there is error shown in the terminal

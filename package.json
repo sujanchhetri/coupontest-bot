@@ -4,8 +4,8 @@
   "description": "scraper",
   "main": "script.js",
   "scripts": {
-    "start": "node script.js",
-    "build":"pkg --out-path build script.js --public"
+    "start": "tsc && node scraperjs/script.js",
+    "build": "pkg --out-path build scraperjs/script.js --public"
   },
   "keywords": [],
   "author": "Sujan Chhetri",
@@ -14,5 +14,11 @@
     "puppeteer": "^10.4.0",
     "puppeteer-extra": "^3.2.2",
     "puppeteer-extra-plugin-stealth": "^2.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^16.10.3",
+    "@types/puppeteer": "^5.4.4",
+    "pkg": "^5.3.3",
+    "typescript": "^4.4.3"
   }
 }

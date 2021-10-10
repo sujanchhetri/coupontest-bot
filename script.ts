@@ -1,29 +1,18 @@
 const puppeteer = require("puppeteer-extra");
-const path = require('path')
+const path = require("path");
 const fs = require("fs");
-
+const pkg = require("pkg");
 const pincode = "000";
 
-async function loginUser(options) {
+async function loginUser(options: any) {
   try {
-    // const StealthPlugin = require("puppeteer-extra-plugin-stealth");
-    // puppeteer.use(StealthPlugin());
-
- const isPkg = typeof process.pkg !== 'undefined';
- const chromiumExecutablePath = (isPkg
-   ? puppeteer.executablePath().replace(
-       /^.*?\\node_modules\\puppeteer\\.local-chromium/,      //<------ That is for windows users, for linux users use:  /^.*?\/node_modules\/puppeteer\/\.local-chromium/ 
-       path.join(path.dirname(process.execPath), 'chromium')   //<------ Folder name, use whatever you want
-     )
-   : puppeteer.executablePath()
- );
-
-
+    const StealthPlugin = require("puppeteer-extra-plugin-stealth");
+    puppeteer.use(StealthPlugin());
+    
     const browser = await puppeteer.launch({
       args: ["--start-maximized"],
       headless: true,
-      defaultViewport: null,
-      executablePath: chromiumExecutablePath
+      defaultViewport: null
     });
 
     const page = await browser.newPage();
@@ -55,7 +44,13 @@ async function loginUser(options) {
     });
 
     await page.evaluate(() => {
-      document.querySelector("button[type=submit]").click();
+      let element: HTMLElement = document.querySelector(
+        "button[type=submit]",
+      ) as HTMLElement;
+
+      if (element instanceof HTMLElement) {
+        element.click();
+      }
     });
 
     console.log("-------------------------------------------------------");
@@ -71,9 +66,12 @@ async function loginUser(options) {
         },
       );
       data = await page.evaluate(() => {
-        return document.querySelector(
+        let element: HTMLElement = document.querySelector(
           ".js-loyalty-silverwave-balance__card-balance",
-        ).innerText;
+        ) as HTMLElement;
+        if (element instanceof HTMLElement) {
+          return element.innerText;
+        }
       });
 
       let info = "Account = " + options.number + " has balance =" + data;
